@@ -11,6 +11,26 @@
 </section>
 
 <section class="mb-5 border-bottom pb-4">
+  <div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white text-center p-3">
+            <h3>{{ total_tasks }}</h3>
+            <p class="mb-0">Total Tasks</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white text-center p-3">
+            <h3>{{ completed_tasks }}</h3>
+            <p class="mb-0">Completed</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-info text-white text-center p-3">
+            <h3>{{ total_pomos }}</h3>
+            <p class="mb-0">Total Pomos Logged</p>
+        </div>
+    </div>
+</div>
   <h2 class="h5">Add New Task</h2>
   <form action="{{ url_for('main.add_task') }}" method="POST" class="row g-3">
     <div class="col-md-6">
