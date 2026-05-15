@@ -24,14 +24,14 @@ def index():
 
 @main.route('/add', methods=['POST'])
 def add_task():
-    # 1. Get data from the form
+    # Get data from the form
     name = request.form.get('name')
     est = request.form.get('est_pomos')
 
-    # 2. Create a new Task object (assuming userID 1 for now)
+    # Create a new Task object (assuming userID 1 for now)
     new_task = Task(taskName=name, estPomos=est, calID='CAL001', isComplete=False, actualPomos=0)
 
-    # 3. Save to database
+    # Save to database
     db.session.add(new_task)
     db.session.commit()
 
@@ -39,13 +39,26 @@ def add_task():
 
 @main.route('/complete/<int:task_id>', methods=['POST'])
 def complete_task(task_id):
-    # 1. Fetch the specific task by its ID
+    # Fetch the specific task by its ID
     task = Task.query.get_or_404(task_id)
     
-    # 2. Update the status
+    # Update the status
     task.isComplete = True
     
-    # 3. Commit the change
+    # Commit the change
+    db.session.commit()
+    
+    return redirect(url_for('main.index'))
+
+@main.route('/delete/<int:task_id>', methods=['POST'])
+def delete_task(task_id):
+    # Find the task
+    task = Task.query.get_or_404(task_id)
+    
+    # Remove it from the session
+    db.session.delete(task)
+    
+    # Commit the change to the .db file
     db.session.commit()
     
     return redirect(url_for('main.index'))
