@@ -13,3 +13,5 @@ Insert:
     If a new task is added and the calendar ID isn't included, then the task won't show up on the calendar.
 Delete:
     If a task is removed and the calendar isn't updated then it might still show up.
+
+*** Decomposition Steps ***
