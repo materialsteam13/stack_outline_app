@@ -1,10 +1,10 @@
-*** Original Functional Dependencies ***
+*** Original Functional Dependencies / 1NF ***
 User Table:
-    userID --> {userName, email, joinDate, lastLogin, totalTasksCompleted}
+    Primary Key: userID --> {userName, email, joinDate, lastLogin, totalTasksCompleted}
 Calendar Table:
-    calID --> {userID, deadlineDate, calName, cUpdatedAt}
+    Primary Key: calID --> {userID, deadlineDate, calName, cUpdatedAt}
 Task Table:
-    taskID --> {calID, taskName, taskDetails, isComplete, estPomos, actualPomos, rowVersion}
+    Primary Key: taskID --> {calID, taskName, taskDetails, isComplete, estPomos, actualPomos, rowVersion}
 
 *** Anomoly Identification ***
 Update:
@@ -14,4 +14,15 @@ Insert:
 Delete:
     If a task is removed and the calendar isn't updated then it might still show up.
 
-*** Decomposition Steps ***
+*** 2NF Is complete since my primary keys are not composite ***
+
+*** 3NF Break Down ***
+Derived Data issue in User Table:
+     `totalTasksCompleted` depended on the state of the Task table rather than the userID alone.
+**Action:** Removed `totalTasksCompleted` from the User entity definition to prevent data                  desynchronization (Update Anomaly).
+Result: Schema is in 3NF. All non-key attributes depend on "the key, the whole key, and nothing but the key."
+
+*** Final 3NF Relations ***
+1. User(userID [PK], userName, email, joinDate, lastLogin)
+2. Calendar(calID [PK], userID [FK], calName, deadlineDate, cUpdatedAt)
+3. Task(taskID [PK], calID [FK], taskName, taskDetails, isComplete, estPomos, actualPomos, rowVersion)
