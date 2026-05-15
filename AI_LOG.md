@@ -53,3 +53,10 @@ At line:1 char:1
 Mentioned that this is a classic Windows PowerShell Struggle. Walked through finding activate.ps1 and when I told it I didn't have one, it determined that the venv I ran the first time didn't complete. Gave me commands to remove the broken environment and recreate it.
 * Verification:
 Having the python -m venv .venv match with the Project 3 Setup Instructions I followed the rm -r .venv and did an watched the files update in VSCode file tree to see what files came back and the new files showed up.
+
+* Entry:
+Where on the github page should I find the link to submit to my professor?
+* AI Output:
+Copy the link in the address bar from wihtin the repository.
+* Verification:
+Realization that I was overcomplicating turning this assignment in looking for a "share link" like it was a google doc.
