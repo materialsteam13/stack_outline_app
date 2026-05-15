@@ -1,3 +1,9 @@
+# Project Description
+Project Katch-Up is my Senior Design project. This database is created as a piece of what our database
+on that project might look like. This project tackles User, Calendar, and Task tables and their relations.
+It tracks tasks in a list on a calendar related to a user. The tasks keep a track of the Pomodoros it took
+to complete the assignment.
+
 # Stack Outline App
 
 Barebones project outline for:
@@ -25,6 +31,8 @@ stack_outline_app/
   requirements.txt
   .env.example
   .gitignore
+  NORMALIZATION.md
+  AI_LOG.md
 ```
 
 ## Quick Start
@@ -46,6 +54,21 @@ stack_outline_app/
 
 ## Notes
 
-- SQLite is used out of the box via `DATABASE_URL=sqlite:///app.db`.
+- SQLite is used out of the box via `DATABASE_URL=sqlite:///katchup.db`.
 - To switch databases, set `DATABASE_URL` (for example, PostgreSQL/MySQL URI) and install the corresponding driver.
 - Tables are auto-created at startup for this minimal starter (`db.create_all()`).
+- ZyBooks Web Programming book was used to reference HTML and CSS. This was obtained through Prof. Bagai's Web Programming class this semester.
+- Python.org was consulted for syntax review.
+
+# Usage
+To run the application:
+   flask run
+
+Open your browser to:
+   http://127.0.0.1:5000
+
+Features
+- Dashboard: view total tasks and pomodoros logged using the SQL aggregate functions
+- Create: add new tasks to the list
+- Update: log pomodoros or mark tasks as complete
+- Delete: remove tasks from the database.
