@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from .models import User, Calendar, Task
 from .extensions import db
 from sqlalchemy import func
+from datetime import datetime
 
 main = Blueprint("main", __name__)
 
@@ -79,4 +80,26 @@ def delete_task(task_id):
     # Commit the change to the .db file
     db.session.commit()
     
+    return redirect(url_for('main.index'))
+
+@main.route('/log_pomo/<int:task_id>', methods=['POST'])
+def log_pomo(task_id):
+    try:
+        # Start of Transactional logic
+        task = Task.query.get_or_404(task_id)
+        
+        # Step 1: Update Task count
+        task.actualPomos += 1
+        
+        # Step 2: Update the parent Calendar's timestamp
+        # This links two related tables in one operation (Requirement 26 & 27)
+        if task.calendar:
+            task.calendar.cUpdatedAt = datetime.utcnow()
+        
+        # Step 3: Commit both changes together
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return f"Transaction failed: {str(e)}", 500
+        
     return redirect(url_for('main.index'))
