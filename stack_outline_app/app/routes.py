@@ -36,3 +36,16 @@ def add_task():
     db.session.commit()
 
     return redirect(url_for('main.index'))
+
+@main.route('/complete/<int:task_id>', methods=['POST'])
+def complete_task(task_id):
+    # 1. Fetch the specific task by its ID
+    task = Task.query.get_or_404(task_id)
+    
+    # 2. Update the status
+    task.isComplete = True
+    
+    # 3. Commit the change
+    db.session.commit()
+    
+    return redirect(url_for('main.index'))
