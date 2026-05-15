@@ -29,7 +29,7 @@ def add_task():
     est = request.form.get('est_pomos')
 
     # 2. Create a new Task object (assuming userID 1 for now)
-    new_task = Task(taskName=name, estPomos=est, userID=1, isComplete=False, actualPomos=0)
+    new_task = Task(taskName=name, estPomos=est, calID='CAL001', isComplete=False, actualPomos=0)
 
     # 3. Save to database
     db.session.add(new_task)
